@@ -1,14 +1,22 @@
 import express from "express";
 
 const router = express.Router();
+import supabase from "../config/supabase.js";
 
-router.get("/usuarios", (req, res) => {
-  res.json([
-    {
-      id: 1,
-      name: "test",
-    },
-  ]);
+router.get("/usuarios", async (req, res) => {
+  const { data, error } = await supabase.from("members").select("*");
+
+  if (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+
+  return res.json({
+    success: true,
+    data,
+  });
 });
 
 //post methods
