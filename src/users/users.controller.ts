@@ -13,7 +13,7 @@ import {
 export class UsersController {
   @Get()
   findAll() {
-    return [];
+    return [ ];
   }
 
   @Get()
